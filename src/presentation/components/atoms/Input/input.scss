@@ -1,0 +1,13 @@
+@use '@/presentation/styles/variables.scss' as *;
+
+.input {
+    width: 20rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid $color-black;
+    padding-left: 0.5rem;
+}
+
+.input:focus {
+    outline: none;
+}

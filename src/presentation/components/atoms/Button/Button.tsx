@@ -1,13 +1,14 @@
 import './button.scss';
 
 interface ButtonProps {
-    // Agregá tus props acá
+    textButton: string;
+    onClick: () => void;
 }
 
-export const Button = ({}: ButtonProps) => {
+export const Button = ({ textButton, onClick }: ButtonProps) => {
     return (
-        <div className="button">
-            <h2>Button works!</h2>
-        </div>
+        <button className="button" onClick={onClick}>
+            {textButton}
+        </button>
     );
 };

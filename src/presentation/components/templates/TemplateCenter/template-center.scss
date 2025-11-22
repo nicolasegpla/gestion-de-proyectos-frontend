@@ -1,0 +1,12 @@
+@use '@/presentation/styles/index.scss' as *;
+
+.template-center {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}

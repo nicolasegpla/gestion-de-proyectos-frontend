@@ -1,0 +1,33 @@
+// 🎨 Colores base
+$color-white: #ffffff;
+$color-black: #000000;
+// 🎨 Colores de texto
+$color-text-base: #4B4B4B;
+
+
+// ✅ Estado: Éxito
+$color-success: #2E7D32;     // Verde principal
+$color-success-light: #4CAF50;  // Hover o backgrounds suaves
+$color-success-dark: #1B5E20;   // Texto fuerte sobre fondo claro
+
+// ❌ Estado: Error
+$color-error: #C62828;       // Rojo principal
+$color-error-light: #EF5350;
+$color-error-dark: #B71C1C;
+
+// ⚠️ Estado: Advertencia
+$color-warning: #F9A825;     // Amarillo principal
+$color-warning-light: #FFEB3B;
+$color-warning-dark: #F57F17;
+
+
+// Fontes
+$font-family-base: 'Roboto', sans-serif;
+$font-size-base: 16px;
+$font-size-large: 20px;
+$font-size-xlarge: 24px;
+$font-size-small: 14px;
+
+// fonrt weights
+$font-weight-medium: 500;
+$font-weight-bold: 700;

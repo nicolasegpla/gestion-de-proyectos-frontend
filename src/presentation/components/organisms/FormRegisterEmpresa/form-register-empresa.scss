@@ -1,0 +1,25 @@
+@use '@/presentation/styles/variables.scss' as *;
+
+.form-register-empresa {
+    width: 360px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $color-black;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+}
+
+.form-register-empresa__select {
+    width: 20rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid $color-black;
+    padding-left: 0.5rem;
+    background-color: $color-white;
+    color: $color-black;
+}

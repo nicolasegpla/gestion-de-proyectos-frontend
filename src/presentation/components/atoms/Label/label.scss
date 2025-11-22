@@ -1,0 +1,8 @@
+@use '@/presentation/styles/variables.scss' as *;
+
+.label {
+    color: $color-black;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+}

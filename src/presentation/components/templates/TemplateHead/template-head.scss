@@ -1,0 +1,10 @@
+@use '@/presentation/styles/index.scss' as *;
+
+.template-head {
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}

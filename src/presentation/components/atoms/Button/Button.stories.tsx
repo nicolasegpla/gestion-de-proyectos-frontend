@@ -13,5 +13,10 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
-    args: {},
+    args: {
+        textButton: 'Click Me',
+        onClick: () => {
+            console.log('Button clicked');
+        },
+    },
 };

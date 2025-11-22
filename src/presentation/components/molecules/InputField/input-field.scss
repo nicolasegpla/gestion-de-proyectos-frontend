@@ -1,0 +1,14 @@
+@use '@/presentation/styles/index.scss' as *;
+
+.input-field {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.input-field:nth-child(1) .label {
+    padding-left: .25rem;
+}
+
