@@ -9,10 +9,6 @@ interface UseRoutesProviderProps {
 }
 
 export const useRouterProvider = ({ token }: UseRoutesProviderProps) => {
-    const Dashboard = lazy(() => import('../views/Dashboard/Dashboard'));
-    const Historias = lazy(() => import('../views/Hitorias/Hitorias'));
-    const Tikets = lazy(() => import('../views/Tikets/Tikets'));
-
     const AppRoutes = () => {
         let routes = useRoutes([
             {
@@ -26,36 +22,6 @@ export const useRouterProvider = ({ token }: UseRoutesProviderProps) => {
             {
                 path: '/register',
                 element: <Register />,
-            },
-            {
-                path: '/dashboard',
-                element: token ? (
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <Dashboard />
-                    </Suspense>
-                ) : (
-                    <Navigate to="/login" replace />
-                ),
-            },
-            {
-                path: '/historias',
-                element: token ? (
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <Historias />
-                    </Suspense>
-                ) : (
-                    <Navigate to="/login" replace />
-                ),
-            },
-            {
-                path: '/tickets',
-                element: token ? (
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <Tikets />
-                    </Suspense>
-                ) : (
-                    <Navigate to="/login" replace />
-                ),
             },
         ]);
 
