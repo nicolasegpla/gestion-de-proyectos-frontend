@@ -41,7 +41,7 @@ const PresentacionalContext = createContext<PresentacionalContextProps>({
 const PresentacionalContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [PrimerEstado, setPrimerEstado] = React.useState(true);
     const [TypeRegister, setTypeRegister] = React.useState('none');
-    const [TypeLogin, setTypeLogin] = React.useState('none');
+    const [TypeLogin, setTypeLogin] = React.useState('empresa');
     const [CrearProyectoEstado, setCrearProyectoEstado] = React.useState(false);
     const [IdHistoria, setIdHistoria] = React.useState<number | null>(null);
     const [CrearHistoriaEstado, setCrearHistoriaEstado] = React.useState(false);

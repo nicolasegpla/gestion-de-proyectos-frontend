@@ -55,7 +55,10 @@ export const Login = ({}: LoginProps) => {
     const { goToDashboard, goToRegister } = useNavigateService();
     const { setToken } = useTokenStore();
 
-    const API_URL_LOGIN_EMPRESA = 'http://3.238.179.242:8000/auth/auth/login';
+    const URL_BASE = import.meta.env.VITE_URL_BASE;
+
+    const API_URL_LOGIN_EMPRESA = `${URL_BASE}/auth/auth/login`;
+    console.log('API_URL_LOGIN_EMPRESA:', API_URL_LOGIN_EMPRESA);
 
     const loginEmpresaFetch = async (empresa: typeof loginEmpresa) => {
         try {
@@ -147,27 +150,22 @@ export const Login = ({}: LoginProps) => {
     return (
         <>
             <CenterLayout>
-                {TypeLogin === 'none' && (
+                <TemplateCenter>
+                    <h1>Sign in</h1>
                     <TemplateCenter>
-                        <h1>Seleccionar tipo de Login</h1>
-                        <TemplateCenter>
-                            <Button
-                                textButton="Login Empresa"
-                                onClick={() => setTypeLogin('empresa')}
-                            />
-                            <Button
-                                textButton="Login Usuario"
-                                onClick={() => setTypeLogin('usuario')}
-                            />
-                            <p className="link" onClick={goToRegister}>
-                                Register
-                            </p>
-                        </TemplateCenter>
+                        <Button
+                            textButton="Login Empresa"
+                            onClick={() => setTypeLogin('empresa')}
+                        />
+                        <Button
+                            textButton="Login Usuario"
+                            onClick={() => setTypeLogin('usuario')}
+                        />
                     </TemplateCenter>
-                )}
+                </TemplateCenter>
+
                 {TypeLogin === 'empresa' && (
                     <TemplateCenter>
-                        <h1>Login Empresa</h1>
                         <FormRegisterEmpresa
                             buttonProps={{
                                 textButton: 'Login empresa',
@@ -175,11 +173,13 @@ export const Login = ({}: LoginProps) => {
                             }}
                             inputsFieldData={dataInputsFieldEmpresa}
                         />
+                        <p className="link" onClick={goToRegister}>
+                            Forgot Your Password?
+                        </p>
                     </TemplateCenter>
                 )}
                 {TypeLogin === 'usuario' && (
                     <TemplateCenter>
-                        <h1>Login Usuario</h1>
                         <FormRegisterEmpresa
                             buttonProps={{
                                 textButton: 'Login usuario',
@@ -187,8 +187,14 @@ export const Login = ({}: LoginProps) => {
                             }}
                             inputsFieldData={dataInputsFieldUsuario}
                         />
+                        <p className="link" onClick={goToRegister}>
+                            Forgot Your Password?
+                        </p>
                     </TemplateCenter>
                 )}
+                <p className="link" onClick={goToRegister}>
+                    Company Sign Up
+                </p>
             </CenterLayout>
         </>
     );
