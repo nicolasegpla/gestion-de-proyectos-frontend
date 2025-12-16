@@ -1,4 +1,5 @@
 @use '@/presentation/styles/index.scss' as *;
+@use '@/presentation/styles/mixins.scss' as *;
 
 .circle {
     position: absolute;
@@ -9,6 +10,12 @@
     border-radius: 50%;
     background-color: #F8B933;
     border-radius: 36% 64% 61% 39% / 30% 30% 70% 70% ;
+    @include responsiveCirclesLogin(mobile) {
+        width: 30rem;
+        height: 30rem;
+        top: -10rem;
+        left: -12rem;
+    }
 }
 
 .circle-two {

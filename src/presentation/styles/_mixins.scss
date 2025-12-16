@@ -1,0 +1,19 @@
+@mixin responsiveCirclesLogin($breakpoint) {
+    @if $breakpoint == mobile {
+        @media (max-width: 767px) { // Puedes ajustar este valor según tus necesidades
+            @content;
+        }
+    } @else if $breakpoint == tablet {
+        @media (min-width: 768px) and (max-width: 1024px) {
+            @content;
+        }
+    } @else if $breakpoint == desktop {
+        @media (min-width: 1025px) {
+            @content;
+        }
+    } @else {
+        @media (min-width: #{$breakpoint}) {
+            @content;
+        }
+    }
+}
