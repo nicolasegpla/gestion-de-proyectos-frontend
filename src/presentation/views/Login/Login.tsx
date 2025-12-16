@@ -7,7 +7,6 @@ import { PresentacionalContext } from '@/presentation/context/PresentacionalCont
 import { CenterLayout } from '@/presentation/layouts';
 import { Circle } from '@/presentation/components/atoms/Circle/Circle';
 import {
-    Button,
     FormRegisterEmpresa,
     SelectTypeUserButton,
     TemplateCenter,
@@ -16,6 +15,7 @@ import {
 } from '@/presentation/components';
 import { useNavigateService } from '@/presentation/routes/useNavigateService';
 import { useTokenStore } from '@/store/zustand/useTokenStore';
+import { useLoginBusinessViewModel } from '@/presentation/viewmodels/useLoginBusinessViewModel';
 
 interface LoginProps {
     // add your props here
@@ -24,10 +24,8 @@ interface LoginProps {
 export const Login = () => {
     const { TypeLogin, setTypeLogin } = useContext(PresentacionalContext);
 
-    const [loginEmpresa, setLoginEmpresa] = useState({
-        email_contacto: '',
-        password: '',
-    });
+    const { loginEmpresa, setLoginEmpresa, isLoading, error, handleLoginBusiness } =
+        useLoginBusinessViewModel();
 
     const handleChangeLoginEmpresa = (e: React.ChangeEvent<HTMLInputElement>) => {
         setLoginEmpresa({
@@ -35,8 +33,6 @@ export const Login = () => {
             [e.target.name]: e.target.value,
         });
     };
-
-    console.log('loginEmpresa:', loginEmpresa);
 
     const dataInputsFieldEmpresa = [
         {
@@ -62,35 +58,6 @@ export const Login = () => {
 
     const { goToDashboard, goToRegister } = useNavigateService();
     const { setToken } = useTokenStore();
-
-    const URL_BASE = import.meta.env.VITE_URL_BASE;
-
-    const API_URL_LOGIN_EMPRESA = `${URL_BASE}/auth/auth/login`;
-    console.log('API_URL_LOGIN_EMPRESA:', API_URL_LOGIN_EMPRESA);
-
-    const loginEmpresaFetch = async (empresa: typeof loginEmpresa) => {
-        try {
-            const response = await axios.post(API_URL_LOGIN_EMPRESA, empresa);
-            console.log('Login empresa:', response.data);
-            setLoginEmpresa({
-                email_contacto: '',
-                password: '',
-            });
-            setToken(response.data.access_token);
-            goToDashboard();
-            return response.data;
-        } catch (error: any) {
-            console.error(
-                'Error al hacer login con empresa:',
-                error.response?.data || error.message
-            );
-            throw error;
-        }
-    };
-
-    const handleSubmitLoginEmpresa = async () => {
-        await loginEmpresaFetch(loginEmpresa);
-    };
 
     const [loginUsuario, setLoginUsuario] = useState({
         email: '',
@@ -153,8 +120,6 @@ export const Login = () => {
         await loginUsuarioFetch(loginUsuario);
     };
 
-    const [isActive, setIsActive] = useState(false);
-
     return (
         <>
             <CenterLayout>
@@ -188,7 +153,7 @@ export const Login = () => {
                             <FormRegisterEmpresa
                                 buttonProps={{
                                     textButton: 'Login',
-                                    onClick: handleSubmitLoginEmpresa,
+                                    onClick: handleLoginBusiness,
                                 }}
                                 inputsFieldData={dataInputsFieldEmpresa}
                             />
