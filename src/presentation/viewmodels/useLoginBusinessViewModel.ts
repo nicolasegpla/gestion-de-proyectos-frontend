@@ -1,5 +1,5 @@
 //custom hook to handle business login logic
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { useNavigateService } from '../routes/useNavigateService';
 import { validateEmailInput } from '../utils/validators';
@@ -17,6 +17,36 @@ export const useLoginBusinessViewModel = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+
+    const handleChangeLoginEmpresa = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setLoginEmpresa({
+            ...loginEmpresa,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const dataInputsFieldEmpresa = [
+        {
+            inputProps: {
+                name: 'email_contacto',
+                type: 'text',
+                placeholder: 'Business email address',
+                value: loginEmpresa.email_contacto,
+                onChange: handleChangeLoginEmpresa,
+            },
+        },
+        {
+            labelProps: { label: 'Password' },
+            inputProps: {
+                name: 'password',
+                type: 'password',
+                placeholder: 'Password',
+                value: loginEmpresa.password,
+                onChange: handleChangeLoginEmpresa,
+            },
+        },
+    ];
+
     const { goToDashboard } = useNavigateService();
 
     const handleLoginBusiness = async () => {
@@ -56,5 +86,6 @@ export const useLoginBusinessViewModel = () => {
         isLoading,
         error,
         handleLoginBusiness,
+        dataInputsFieldEmpresa,
     };
 };

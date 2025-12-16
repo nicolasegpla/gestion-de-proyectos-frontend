@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react';
-import axios from 'axios';
+import { useContext } from 'react';
 import { BuildingOfficeIcon, UsersIcon } from '@heroicons/react/24/outline';
 
-import './login.scss';
 import { PresentacionalContext } from '@/presentation/context/PresentacionalContext';
+import { useNavigateService } from '@/presentation/routes/useNavigateService';
+import { useLoginBusinessViewModel } from '@/presentation/viewmodels/useLoginBusinessViewModel';
+import { useLoginUserViewModel } from '@/presentation/viewmodels/useLoginUserViewModel';
 import { CenterLayout } from '@/presentation/layouts';
 import { Circle } from '@/presentation/components/atoms/Circle/Circle';
 import {
@@ -13,112 +14,14 @@ import {
     TemplateRow,
     Title,
 } from '@/presentation/components';
-import { useNavigateService } from '@/presentation/routes/useNavigateService';
-import { useTokenStore } from '@/store/zustand/useTokenStore';
-import { useLoginBusinessViewModel } from '@/presentation/viewmodels/useLoginBusinessViewModel';
-
-interface LoginProps {
-    // add your props here
-}
+import './login.scss';
 
 export const Login = () => {
     const { TypeLogin, setTypeLogin } = useContext(PresentacionalContext);
+    const { goToRegister } = useNavigateService();
 
-    const { loginEmpresa, setLoginEmpresa, isLoading, error, handleLoginBusiness } =
-        useLoginBusinessViewModel();
-
-    const handleChangeLoginEmpresa = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setLoginEmpresa({
-            ...loginEmpresa,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const dataInputsFieldEmpresa = [
-        {
-            inputProps: {
-                name: 'email_contacto',
-                type: 'text',
-                placeholder: 'Business email address',
-                value: loginEmpresa.email_contacto,
-                onChange: handleChangeLoginEmpresa,
-            },
-        },
-        {
-            labelProps: { label: 'Password' },
-            inputProps: {
-                name: 'password',
-                type: 'password',
-                placeholder: 'Password',
-                value: loginEmpresa.password,
-                onChange: handleChangeLoginEmpresa,
-            },
-        },
-    ];
-
-    const { goToDashboard, goToRegister } = useNavigateService();
-    const { setToken } = useTokenStore();
-
-    const [loginUsuario, setLoginUsuario] = useState({
-        email: '',
-        password: '',
-    });
-
-    const handleChangeLoginUsuario = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setLoginUsuario({
-            ...loginUsuario,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    console.log('loginUsuario:', loginUsuario);
-
-    const dataInputsFieldUsuario = [
-        {
-            inputProps: {
-                name: 'email',
-                type: 'text',
-                placeholder: 'User email address',
-                value: loginUsuario.email,
-                onChange: handleChangeLoginUsuario,
-            },
-        },
-        {
-            inputProps: {
-                name: 'password',
-                type: 'password',
-                placeholder: 'Password',
-                value: loginUsuario.password,
-                onChange: handleChangeLoginUsuario,
-            },
-        },
-    ];
-
-    const API_URL_LOGIN_USUARIO = 'http://3.238.179.242:8000/usuarios/usuarios/login';
-
-    const loginUsuarioFetch = async (usuario: typeof loginUsuario) => {
-        try {
-            const response = await axios.post(API_URL_LOGIN_USUARIO, usuario);
-            console.log('Login usuario:', response.data);
-            setLoginUsuario({
-                email: '',
-                password: '',
-            });
-            setToken(response.data.access_token);
-            goToDashboard();
-            return response.data;
-        } catch (error: any) {
-            console.error(
-                'Error al hacer login con usuario:',
-                error.response?.data || error.message
-            );
-            throw error;
-        }
-    };
-
-    const handleSubmitLoginUsuario = async () => {
-        await loginUsuarioFetch(loginUsuario);
-    };
+    const businessViewModel = useLoginBusinessViewModel();
+    const userViewModel = useLoginUserViewModel();
 
     return (
         <>
@@ -129,7 +32,7 @@ export const Login = () => {
                     <Title text="Sign in" subText="Welcome Back!" />
                     <TemplateRow>
                         <SelectTypeUserButton
-                            isActive={TypeLogin === 'empresa' ? true : false}
+                            isActive={TypeLogin === 'empresa'}
                             onClick={() => setTypeLogin('empresa')}
                             children={
                                 <BuildingOfficeIcon
@@ -138,7 +41,7 @@ export const Login = () => {
                             }
                         />
                         <SelectTypeUserButton
-                            isActive={TypeLogin === 'usuario' ? true : false}
+                            isActive={TypeLogin === 'usuario'}
                             onClick={() => setTypeLogin('usuario')}
                             children={
                                 <UsersIcon
@@ -153,9 +56,9 @@ export const Login = () => {
                             <FormRegisterEmpresa
                                 buttonProps={{
                                     textButton: 'Login',
-                                    onClick: handleLoginBusiness,
+                                    onClick: businessViewModel.handleLoginBusiness,
                                 }}
-                                inputsFieldData={dataInputsFieldEmpresa}
+                                inputsFieldData={businessViewModel.dataInputsFieldEmpresa}
                             />
                             <p className="link" onClick={goToRegister}>
                                 Forgot Your Password?
@@ -167,9 +70,9 @@ export const Login = () => {
                             <FormRegisterEmpresa
                                 buttonProps={{
                                     textButton: 'Login',
-                                    onClick: handleSubmitLoginUsuario,
+                                    onClick: userViewModel.handleLoginUser,
                                 }}
-                                inputsFieldData={dataInputsFieldUsuario}
+                                inputsFieldData={userViewModel.dataInputsFieldUsuario}
                             />
                             <p className="link" onClick={goToRegister}>
                                 Forgot Your Password?
