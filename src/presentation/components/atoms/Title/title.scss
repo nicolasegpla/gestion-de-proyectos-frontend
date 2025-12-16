@@ -1,0 +1,21 @@
+@use '@/presentation/styles/index.scss' as *;
+
+.title {
+    width:  360px;
+    height: auto;
+    text-align: center;
+    font-weight: 400;
+    color: #010103;
+    font-size: 48px;
+    padding-bottom: 34px;
+    padding-left: 16px;
+    z-index: 100;
+    
+}
+
+.title__subText {
+    font-size: 24px;
+    padding-top: 8px;
+    color: #010103;
+    z-index: 100;
+}

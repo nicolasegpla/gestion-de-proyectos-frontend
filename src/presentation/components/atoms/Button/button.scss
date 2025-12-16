@@ -2,13 +2,13 @@
 
 .button {
     width: 20rem;
-    height: 2rem;
+    height: 3rem;
     border: none;
-    border-radius: 0.5rem;
-    background-color: $color-black;
+    border-radius: 20rem;
+    background-color: #010103;
     color: $color-white;
-    font-family: $font-family-base;
     font-size: $font-size-base;
     font-weight: $font-weight-medium;
     cursor: pointer;
+    z-index: 100;
 }

@@ -1,10 +1,19 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
+import { BuildingOfficeIcon, UsersIcon } from '@heroicons/react/24/outline';
 
 import './login.scss';
 import { PresentacionalContext } from '@/presentation/context/PresentacionalContext';
 import { CenterLayout } from '@/presentation/layouts';
-import { Button, FormRegisterEmpresa, TemplateCenter } from '@/presentation/components';
+import { Circle } from '@/presentation/components/atoms/Circle/Circle';
+import {
+    Button,
+    FormRegisterEmpresa,
+    SelectTypeUserButton,
+    TemplateCenter,
+    TemplateRow,
+    Title,
+} from '@/presentation/components';
 import { useNavigateService } from '@/presentation/routes/useNavigateService';
 import { useTokenStore } from '@/store/zustand/useTokenStore';
 
@@ -12,7 +21,7 @@ interface LoginProps {
     // add your props here
 }
 
-export const Login = ({}: LoginProps) => {
+export const Login = () => {
     const { TypeLogin, setTypeLogin } = useContext(PresentacionalContext);
 
     const [loginEmpresa, setLoginEmpresa] = useState({
@@ -31,11 +40,10 @@ export const Login = ({}: LoginProps) => {
 
     const dataInputsFieldEmpresa = [
         {
-            labelProps: { label: 'Email contacto' },
             inputProps: {
                 name: 'email_contacto',
                 type: 'text',
-                placeholder: 'email_contacto',
+                placeholder: 'Business email address',
                 value: loginEmpresa.email_contacto,
                 onChange: handleChangeLoginEmpresa,
             },
@@ -45,7 +53,7 @@ export const Login = ({}: LoginProps) => {
             inputProps: {
                 name: 'password',
                 type: 'password',
-                placeholder: 'password',
+                placeholder: 'Password',
                 value: loginEmpresa.password,
                 onChange: handleChangeLoginEmpresa,
             },
@@ -100,21 +108,19 @@ export const Login = ({}: LoginProps) => {
 
     const dataInputsFieldUsuario = [
         {
-            labelProps: { label: 'Email' },
             inputProps: {
                 name: 'email',
                 type: 'text',
-                placeholder: 'email',
+                placeholder: 'User email address',
                 value: loginUsuario.email,
                 onChange: handleChangeLoginUsuario,
             },
         },
         {
-            labelProps: { label: 'Password' },
             inputProps: {
                 name: 'password',
                 type: 'password',
-                placeholder: 'password',
+                placeholder: 'Password',
                 value: loginUsuario.password,
                 onChange: handleChangeLoginUsuario,
             },
@@ -147,54 +153,69 @@ export const Login = ({}: LoginProps) => {
         await loginUsuarioFetch(loginUsuario);
     };
 
+    const [isActive, setIsActive] = useState(false);
+
     return (
         <>
             <CenterLayout>
+                <Circle className="circle" />
+                <Circle className="circle-two" />
                 <TemplateCenter>
-                    <h1>Sign in</h1>
-                    <TemplateCenter>
-                        <Button
-                            textButton="Login Empresa"
+                    <Title text="Sign in" subText="Welcome Back!" />
+                    <TemplateRow>
+                        <SelectTypeUserButton
+                            isActive={TypeLogin === 'empresa' ? true : false}
                             onClick={() => setTypeLogin('empresa')}
+                            children={
+                                <BuildingOfficeIcon
+                                    className={`${TypeLogin === 'empresa' ? 'buttonActive__icon' : 'select-type-user-button__icon'}`}
+                                />
+                            }
                         />
-                        <Button
-                            textButton="Login Usuario"
+                        <SelectTypeUserButton
+                            isActive={TypeLogin === 'usuario' ? true : false}
                             onClick={() => setTypeLogin('usuario')}
+                            children={
+                                <UsersIcon
+                                    className={`${TypeLogin === 'usuario' ? 'buttonActive__icon' : 'select-type-user-button__icon'}`}
+                                />
+                            }
                         />
-                    </TemplateCenter>
-                </TemplateCenter>
+                    </TemplateRow>
 
-                {TypeLogin === 'empresa' && (
-                    <TemplateCenter>
-                        <FormRegisterEmpresa
-                            buttonProps={{
-                                textButton: 'Login empresa',
-                                onClick: handleSubmitLoginEmpresa,
-                            }}
-                            inputsFieldData={dataInputsFieldEmpresa}
-                        />
-                        <p className="link" onClick={goToRegister}>
-                            Forgot Your Password?
-                        </p>
-                    </TemplateCenter>
-                )}
-                {TypeLogin === 'usuario' && (
-                    <TemplateCenter>
-                        <FormRegisterEmpresa
-                            buttonProps={{
-                                textButton: 'Login usuario',
-                                onClick: handleSubmitLoginUsuario,
-                            }}
-                            inputsFieldData={dataInputsFieldUsuario}
-                        />
-                        <p className="link" onClick={goToRegister}>
-                            Forgot Your Password?
-                        </p>
-                    </TemplateCenter>
-                )}
+                    {TypeLogin === 'empresa' && (
+                        <>
+                            <FormRegisterEmpresa
+                                buttonProps={{
+                                    textButton: 'Login',
+                                    onClick: handleSubmitLoginEmpresa,
+                                }}
+                                inputsFieldData={dataInputsFieldEmpresa}
+                            />
+                            <p className="link" onClick={goToRegister}>
+                                Forgot Your Password?
+                            </p>
+                        </>
+                    )}
+                    {TypeLogin === 'usuario' && (
+                        <>
+                            <FormRegisterEmpresa
+                                buttonProps={{
+                                    textButton: 'Login',
+                                    onClick: handleSubmitLoginUsuario,
+                                }}
+                                inputsFieldData={dataInputsFieldUsuario}
+                            />
+                            <p className="link" onClick={goToRegister}>
+                                Forgot Your Password?
+                            </p>
+                        </>
+                    )}
+                </TemplateCenter>
                 <p className="link" onClick={goToRegister}>
                     Company Sign Up
                 </p>
+                <span className="nameApp">Flowbee © 2025</span>
             </CenterLayout>
         </>
     );

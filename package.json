@@ -23,6 +23,8 @@
         "test:services": "vitest run --project services"
     },
     "dependencies": {
+        "@heroicons/react": "^2.2.0",
+        "@heroicons/vue": "^2.2.0",
         "axios": "^1.13.2",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
