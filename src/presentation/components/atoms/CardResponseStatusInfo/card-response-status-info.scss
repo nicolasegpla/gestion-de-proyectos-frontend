@@ -1,0 +1,30 @@
+@use '@/presentation/styles/index.scss' as *;
+
+.card-response-status-info {
+    position: absolute;
+    top: 4.5rem;
+    width: 21.25rem;
+    height: 5rem;
+    border-radius: .75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #030303;
+}
+
+.status-ok {
+    background-color: #02a675a1;
+    border: 2px solid #02a675;
+}
+
+.status-error {
+    background-color: #f23030a1;    
+    border: 2px solid #F23030;
+}
+
+.status-warning {
+    background-color: #FF6B1Aa1;
+    border: 2px solid #FF6B1A;
+}

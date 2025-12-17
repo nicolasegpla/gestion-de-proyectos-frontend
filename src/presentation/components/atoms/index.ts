@@ -5,3 +5,4 @@ export * from './Modal/Modal';
 export * from './SelectTypeUserButton/SelectTypeUserButton';
 export * from './Title/Title';
 export * from './Circle/Circle';
+export * from './CardResponseStatusInfo/CardResponseStatusInfo';

@@ -1,8 +1,8 @@
 //custom hook to handle business login logic
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useNavigateService } from '../routes/useNavigateService';
-import { validateEmailInput } from '../utils/validators';
+import { validateEmailInput, validatePasswordInput } from '../utils/validators';
 
 import { authLoginBusiness } from '@/infrastructure/api';
 import { useTokenStore } from '@/store/zustand/useTokenStore';
@@ -14,6 +14,13 @@ export const useLoginBusinessViewModel = () => {
         email_contacto: '',
         password: '',
     });
+
+    const clearInputs = () => {
+        setLoginEmpresa({
+            email_contacto: '',
+            password: '',
+        });
+    };
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -56,7 +63,10 @@ export const useLoginBusinessViewModel = () => {
         if (!validateEmailInput(loginEmpresa.email_contacto)) {
             setIsLoading(false);
             setError('Invalid email format');
-            alert('Invalid email format');
+            return;
+        } else if (!validatePasswordInput(loginEmpresa.password)) {
+            setIsLoading(false);
+            setError('Invalid password format');
             return;
         }
 
@@ -65,7 +75,6 @@ export const useLoginBusinessViewModel = () => {
                 loginEmpresa,
                 `${import.meta.env.VITE_URL_BASE}/auth/auth/login`
             );
-            console.log('Login empresa:', response);
             setLoginEmpresa({
                 email_contacto: '',
                 password: '',
@@ -73,13 +82,22 @@ export const useLoginBusinessViewModel = () => {
             setToken(response.access_token);
             goToDashboard();
         } catch (error: any) {
-            console.error(
-                'Error al hacer login con empresa:',
-                error.response?.data || error.message
-            );
+            setError(error.response?.data.detail || error.message);
+            setIsLoading(false);
             throw error;
         }
     };
+
+    useEffect(() => {
+        if (error) {
+            const timer = setTimeout(() => {
+                setError(null);
+            }, 7000);
+
+            return () => clearTimeout(timer); // Limpia timer anterior
+        }
+    }, [error]);
+
     return {
         loginEmpresa,
         setLoginEmpresa,
@@ -87,5 +105,6 @@ export const useLoginBusinessViewModel = () => {
         error,
         handleLoginBusiness,
         dataInputsFieldEmpresa,
+        clearInputs,
     };
 };

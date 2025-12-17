@@ -8,6 +8,7 @@ import { useLoginUserViewModel } from '@/presentation/viewmodels/useLoginUserVie
 import { CenterLayout } from '@/presentation/layouts';
 import { Circle } from '@/presentation/components/atoms/Circle/Circle';
 import {
+    CardResponseStatusInfo,
     FormRegisterEmpresa,
     SelectTypeUserButton,
     TemplateCenter,
@@ -28,12 +29,28 @@ export const Login = () => {
             <CenterLayout>
                 <Circle className="circle" />
                 <Circle className="circle-two" />
+                {businessViewModel.error && (
+                    <CardResponseStatusInfo
+                        text={businessViewModel.error}
+                        styleStatus={`${businessViewModel.error === 'Empresa no encontrada' ? 'status-warning' : 'status-error'}`}
+                    />
+                )}
+
+                {userViewModel.errorUser && (
+                    <CardResponseStatusInfo
+                        text={userViewModel.errorUser}
+                        styleStatus={`${userViewModel.errorUser === 'El usuario no existe' ? 'status-warning' : 'status-error'}`}
+                    />
+                )}
                 <TemplateCenter>
                     <Title text="Sign in" subText="Welcome Back!" />
                     <TemplateRow>
                         <SelectTypeUserButton
                             isActive={TypeLogin === 'empresa'}
-                            onClick={() => setTypeLogin('empresa')}
+                            onClick={() => {
+                                setTypeLogin('empresa');
+                                businessViewModel.clearInputs();
+                            }}
                             children={
                                 <BuildingOfficeIcon
                                     className={`${TypeLogin === 'empresa' ? 'buttonActive__icon' : 'select-type-user-button__icon'}`}
@@ -42,7 +59,10 @@ export const Login = () => {
                         />
                         <SelectTypeUserButton
                             isActive={TypeLogin === 'usuario'}
-                            onClick={() => setTypeLogin('usuario')}
+                            onClick={() => {
+                                setTypeLogin('usuario');
+                                userViewModel.clearInputs();
+                            }}
                             children={
                                 <UsersIcon
                                     className={`${TypeLogin === 'usuario' ? 'buttonActive__icon' : 'select-type-user-button__icon'}`}
@@ -55,8 +75,12 @@ export const Login = () => {
                         <>
                             <FormRegisterEmpresa
                                 buttonProps={{
-                                    textButton: 'Login',
-                                    onClick: businessViewModel.handleLoginBusiness,
+                                    textButton: businessViewModel.isLoading
+                                        ? 'Loading...'
+                                        : 'Login',
+                                    onClick: businessViewModel.isLoading
+                                        ? () => {}
+                                        : businessViewModel.handleLoginBusiness,
                                 }}
                                 inputsFieldData={businessViewModel.dataInputsFieldEmpresa}
                             />
@@ -69,8 +93,12 @@ export const Login = () => {
                         <>
                             <FormRegisterEmpresa
                                 buttonProps={{
-                                    textButton: 'Login',
-                                    onClick: userViewModel.handleLoginUser,
+                                    textButton: userViewModel.isLoadingUser
+                                        ? 'Loading...'
+                                        : 'Login',
+                                    onClick: userViewModel.isLoadingUser
+                                        ? () => {}
+                                        : userViewModel.handleLoginUser,
                                 }}
                                 inputsFieldData={userViewModel.dataInputsFieldUsuario}
                             />
