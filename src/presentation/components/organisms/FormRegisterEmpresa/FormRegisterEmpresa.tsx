@@ -25,7 +25,6 @@ export const FormRegisterEmpresa = ({
 }: FormRegisterEmpresaProps) => {
     const defaultInputsFieldData: Array<React.ComponentProps<typeof InputField>> = [
         {
-            labelProps: { label: 'Nombre de la empresa' },
             inputProps: {
                 name: 'nombre',
                 type: 'text',
@@ -35,7 +34,6 @@ export const FormRegisterEmpresa = ({
             },
         },
         {
-            labelProps: { label: 'Nombre de la empresa' },
             inputProps: {
                 name: 'nombre',
                 type: 'text',

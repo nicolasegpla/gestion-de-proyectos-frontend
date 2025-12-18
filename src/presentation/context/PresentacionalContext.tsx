@@ -3,8 +3,6 @@ import React, { createContext } from 'react';
 interface PresentacionalContextProps {
     PrimerEstado: boolean;
     setPrimerEstado: (value: boolean) => void;
-    TypeRegister: string;
-    setTypeRegister: (value: string) => void;
     TypeLogin: string;
     setTypeLogin: (value: string) => void;
     CrearProyectoEstado: boolean;
@@ -22,8 +20,6 @@ interface PresentacionalContextProps {
 const PresentacionalContext = createContext<PresentacionalContextProps>({
     PrimerEstado: false,
     setPrimerEstado: () => {},
-    TypeRegister: '',
-    setTypeRegister: () => {},
     TypeLogin: '',
     setTypeLogin: () => {},
     CrearProyectoEstado: false,
@@ -40,7 +36,6 @@ const PresentacionalContext = createContext<PresentacionalContextProps>({
 
 const PresentacionalContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [PrimerEstado, setPrimerEstado] = React.useState(true);
-    const [TypeRegister, setTypeRegister] = React.useState('none');
     const [TypeLogin, setTypeLogin] = React.useState('empresa');
     const [CrearProyectoEstado, setCrearProyectoEstado] = React.useState(false);
     const [IdHistoria, setIdHistoria] = React.useState<number | null>(null);
@@ -52,8 +47,6 @@ const PresentacionalContextProvider = ({ children }: { children: React.ReactNode
             value={{
                 PrimerEstado,
                 setPrimerEstado,
-                TypeRegister,
-                setTypeRegister,
                 TypeLogin,
                 setTypeLogin,
                 CrearProyectoEstado,
