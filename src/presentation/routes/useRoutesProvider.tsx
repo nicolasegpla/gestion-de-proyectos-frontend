@@ -9,6 +9,8 @@ interface UseRoutesProviderProps {
 }
 
 export const useRouterProvider = ({ token }: UseRoutesProviderProps) => {
+    const Dashboard = lazy(() => import('@/presentation/views/Dashboard/Dashboard'));
+
     const AppRoutes = () => {
         let routes = useRoutes([
             {
@@ -22,6 +24,16 @@ export const useRouterProvider = ({ token }: UseRoutesProviderProps) => {
             {
                 path: '/register',
                 element: <Register />,
+            },
+            {
+                path: '/dashboard',
+                element: token ? (
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Dashboard />
+                    </Suspense>
+                ) : (
+                    <Navigate to="/login" replace />
+                ),
             },
         ]);
 
