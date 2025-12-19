@@ -1,7 +1,7 @@
 import './card-response-status-info.scss';
 
 interface CardResponseStatusInfoProps {
-    text: string;
+    text: string | null;
     styleStatus?: string;
 }
 

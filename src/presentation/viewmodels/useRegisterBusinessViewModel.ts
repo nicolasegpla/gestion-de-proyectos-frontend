@@ -74,7 +74,7 @@ export const useRegisterBusinessViewModel = () => {
             return;
         } else if (!validatePasswordInput(registerEmpresa.password)) {
             setIsLoading(false);
-            setError('Invalid password format');
+            setError('Invalid password, minimum 9 characters');
             return;
         } else if (!validateNameInput(registerEmpresa.nombre)) {
             setIsLoading(false);

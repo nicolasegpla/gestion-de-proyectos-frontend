@@ -1,6 +1,12 @@
 import { useRegisterBusinessViewModel } from '@/presentation/viewmodels/useRegisterBusinessViewModel';
 import { CenterLayout } from '@/presentation/layouts';
-import { Circle, FormRegisterEmpresa, TemplateCenter, Title } from '@/presentation/components';
+import {
+    CardResponseStatusInfo,
+    Circle,
+    FormRegisterEmpresa,
+    TemplateCenter,
+    Title,
+} from '@/presentation/components';
 import './register.scss';
 
 export const Register = () => {
@@ -11,11 +17,37 @@ export const Register = () => {
             <CenterLayout>
                 <Circle className="circle" />
                 <Circle className="circle-two" />
+                {viewModelRegister.error && (
+                    <CardResponseStatusInfo
+                        text={viewModelRegister.error}
+                        styleStatus={`${viewModelRegister.error === 'Invalid email format' ? 'status-warning' : 'status-error'}`}
+                    />
+                )}
+                {viewModelRegister.error && (
+                    <CardResponseStatusInfo
+                        text={viewModelRegister.error}
+                        styleStatus={`${viewModelRegister.error === 'Invalid password, minimum 9 characters' ? 'status-warning' : 'status-error'}`}
+                    />
+                )}
+                {viewModelRegister.error && (
+                    <CardResponseStatusInfo
+                        text={viewModelRegister.error}
+                        styleStatus={`${viewModelRegister.error === 'Invalid name format' ? 'status-warning' : 'status-error'}`}
+                    />
+                )}
+                {viewModelRegister.resgisterSuccess && (
+                    <CardResponseStatusInfo
+                        text={
+                            viewModelRegister.resgisterSuccess ? 'Registration successful!' : null
+                        }
+                        styleStatus={`${viewModelRegister && 'status-ok'}`}
+                    />
+                )}
                 <TemplateCenter>
                     <Title text="Sign up" subText="Get Started!" />
                     <FormRegisterEmpresa
                         buttonProps={{
-                            textButton: 'Registrar empresa',
+                            textButton: 'Registrer',
                             onClick: viewModelRegister.handleRegisterBusiness,
                         }}
                         inputsFieldData={viewModelRegister.dataInputsField}
