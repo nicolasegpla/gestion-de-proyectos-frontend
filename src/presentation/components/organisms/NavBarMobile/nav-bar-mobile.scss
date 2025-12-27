@@ -1,0 +1,16 @@
+@use '@/presentation/styles/index.scss' as *;
+@use '@/presentation/styles/mixins.scss' as *;
+
+.nav-bar-mobile {
+    display: none;
+    @include responsiveCirclesLogin(mobile) {
+        width: 100%;
+        height: 56px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #030303;
+        color: #FAD240;
+        padding: 1rem;
+    }
+}
