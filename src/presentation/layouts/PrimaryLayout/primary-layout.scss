@@ -1,4 +1,5 @@
 @use '@/presentation/styles/index.scss' as *;
+@use '@/presentation/styles/mixins.scss' as *;
 
 .primary-layout {
     width: 100vw;
@@ -7,4 +8,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    @include responsiveCirclesLogin(mobile) {
+        flex-direction: column-reverse;
+    }
 }
