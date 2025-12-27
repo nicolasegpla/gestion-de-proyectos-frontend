@@ -1,0 +1,16 @@
+@use '@/presentation/styles/index.scss' as *;
+@use '@/presentation/styles/mixins.scss' as *;
+
+
+.nav-bar-destop {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fafafa;
+    padding: 1rem;
+    @include responsiveCirclesLogin(mobile) {
+        display: none;
+    }
+}

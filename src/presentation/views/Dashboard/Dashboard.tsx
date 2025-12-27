@@ -1,5 +1,6 @@
 import { PrimaryLayout } from '@/presentation/layouts';
 import './dashboard.scss';
+import { NavBarDestop } from '@/presentation/components';
 
 interface DashboardProps {
     // add your props here
@@ -8,7 +9,7 @@ interface DashboardProps {
 const Dashboard = ({}: DashboardProps) => {
     return (
         <PrimaryLayout>
-            <h1>Dashboard works!</h1>
+            <NavBarDestop />
             <h2>text one</h2>
         </PrimaryLayout>
     );
