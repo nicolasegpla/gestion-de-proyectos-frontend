@@ -1,3 +1,4 @@
+import { PrimaryLayout } from '@/presentation/layouts';
 import './dashboard.scss';
 
 interface DashboardProps {
@@ -6,9 +7,10 @@ interface DashboardProps {
 
 const Dashboard = ({}: DashboardProps) => {
     return (
-        <div className="dashboard">
-            <h2>Dashboard works!</h2>
-        </div>
+        <PrimaryLayout>
+            <h1>Dashboard works!</h1>
+            <h2>text one</h2>
+        </PrimaryLayout>
     );
 };
 
