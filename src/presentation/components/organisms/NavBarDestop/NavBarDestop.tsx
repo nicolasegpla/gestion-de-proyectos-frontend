@@ -1,13 +1,17 @@
+import React from 'react';
+
+import { Logo } from '@/presentation/components/';
+
 import './nav-bar-destop.scss';
 
 interface NavBarDestopProps {
-    // add your props here
+    logoProps: string;
 }
 
-export const NavBarDestop = ({}: NavBarDestopProps) => {
+export const NavBarDestop = ({ logoProps }: NavBarDestopProps) => {
     return (
         <div className="nav-bar-destop">
-            <h2>NavBarDestop works!</h2>
+            <Logo text={logoProps} />
         </div>
     );
 };

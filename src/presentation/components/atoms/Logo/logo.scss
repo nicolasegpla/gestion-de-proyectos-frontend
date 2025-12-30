@@ -1,0 +1,13 @@
+@use '@/presentation/styles/index.scss' as *;
+
+.logo {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__p {
+        font-size: 20px;
+        font-weight: 600;
+    }
+}

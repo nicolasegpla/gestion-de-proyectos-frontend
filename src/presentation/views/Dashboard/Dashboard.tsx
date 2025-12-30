@@ -9,7 +9,7 @@ interface DashboardProps {
 const Dashboard = ({}: DashboardProps) => {
     return (
         <PrimaryLayout>
-            <NavBarDestop />
+            <NavBarDestop logoProps="FlowBee" />
             <NavBarMobile />
             <TemplatePrimary>
                 <h2>add your components here</h2>
