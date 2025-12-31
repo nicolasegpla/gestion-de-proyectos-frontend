@@ -1,0 +1,15 @@
+@use '@/presentation/styles/index.scss' as *;
+
+.button-user {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    background-color: #030303;
+    color: #FAD240;
+    cursor: pointer
+}

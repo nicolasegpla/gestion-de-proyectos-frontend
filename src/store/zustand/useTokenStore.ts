@@ -21,3 +21,22 @@ export const useTokenStore = create<TokenState>((set) => ({
         set({ token, isAuthenticated: !!token });
     },
 }));
+
+interface NameState {
+    nameUser: string | null;
+    setNameUser: (name: string | null) => void;
+}
+
+export const useNameStore = create<NameState>((set) => ({
+    nameUser: sessionStorage.getItem('session')
+        ? JSON.parse(sessionStorage.getItem('session')!).name
+        : null,
+    setNameUser: (name) => {
+        if (name) {
+            sessionStorage.setItem('session', JSON.stringify({ name }));
+        } else {
+            sessionStorage.removeItem('session');
+        }
+        set({ nameUser: name });
+    },
+}));

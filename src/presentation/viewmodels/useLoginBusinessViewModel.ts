@@ -5,10 +5,11 @@ import { useNavigateService } from '../routes/useNavigateService';
 import { validateEmailInput, validatePasswordInput } from '../utils/validators';
 
 import { authLoginBusiness } from '@/infrastructure/api';
-import { useTokenStore } from '@/store/zustand/useTokenStore';
+import { useNameStore, useTokenStore } from '@/store/zustand/useTokenStore';
 
 export const useLoginBusinessViewModel = () => {
     const { setToken } = useTokenStore();
+    const { setNameUser, nameUser } = useNameStore();
 
     const [loginEmpresa, setLoginEmpresa] = useState({
         email_contacto: '',
@@ -80,6 +81,7 @@ export const useLoginBusinessViewModel = () => {
                 password: '',
             });
             setToken(response.access_token);
+            setNameUser(response.empresa_nombre);
             goToDashboard();
         } catch (error: any) {
             setError(error.response?.data.detail || error.message);
@@ -106,5 +108,6 @@ export const useLoginBusinessViewModel = () => {
         handleLoginBusiness,
         dataInputsFieldEmpresa,
         clearInputs,
+        nameUser,
     };
 };
