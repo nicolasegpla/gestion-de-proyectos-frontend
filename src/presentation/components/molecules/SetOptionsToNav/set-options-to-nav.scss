@@ -1,5 +1,11 @@
 @use '@/presentation/styles/index.scss' as *;
 
 .set-options-to-nav {
-    // Components styles
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    cursor: pointer;
 }

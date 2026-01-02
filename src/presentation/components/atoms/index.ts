@@ -8,3 +8,4 @@ export * from './Circle/Circle';
 export * from './CardResponseStatusInfo/CardResponseStatusInfo';
 export * from './Logo/Logo';
 export * from './ButtonUser/ButtonUser';
+export * from './ButtonIcon/ButtonIcon';
