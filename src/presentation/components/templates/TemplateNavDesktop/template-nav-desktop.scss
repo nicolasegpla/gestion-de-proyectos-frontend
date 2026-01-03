@@ -1,0 +1,11 @@
+@use '@/presentation/styles/index.scss' as *;
+
+.template-nav-desktop {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}

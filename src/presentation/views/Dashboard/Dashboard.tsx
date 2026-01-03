@@ -1,8 +1,15 @@
 import { PrimaryLayout } from '@/presentation/layouts';
 import './dashboard.scss';
-import { NavBarDestop, NavBarMobile, TemplatePrimary } from '@/presentation/components';
+import {
+    NavBarDestop,
+    NavBarMobile,
+    SecondNavDesktop,
+    TemplateNavDesktop,
+    TemplatePrimary,
+} from '@/presentation/components';
 import { useLoginBusinessViewModel } from '@/presentation/viewmodels/useLoginBusinessViewModel';
 import { getInitalsName } from '@/presentation/utils/basicFunctions';
+
 import { PlusIcon, UserPlusIcon } from '@heroicons/react/24/outline';
 
 const Dashboard = () => {
@@ -18,15 +25,20 @@ const Dashboard = () => {
 
     return (
         <PrimaryLayout>
-            <NavBarDestop
-                logoProps="FlowBee"
-                onclikButtonUser={() => {}}
-                initialsButtonUser={
-                    viewModelBusiness.nameUser ? getInitalsName(viewModelBusiness.nameUser) : 'NN'
-                }
-                propsButtonIconAdd={propsButtonIconAdd}
-                propsButtonIconUser={propsButtonIconUser}
-            />
+            <TemplateNavDesktop>
+                <NavBarDestop
+                    logoProps="FlowBee"
+                    onclikButtonUser={() => {}}
+                    initialsButtonUser={
+                        viewModelBusiness.nameUser
+                            ? getInitalsName(viewModelBusiness.nameUser)
+                            : 'NN'
+                    }
+                    propsButtonIconAdd={propsButtonIconAdd}
+                    propsButtonIconUser={propsButtonIconUser}
+                />
+                <SecondNavDesktop />
+            </TemplateNavDesktop>
             <NavBarMobile />
             <TemplatePrimary>
                 <h2>add your components here</h2>
