@@ -1,4 +1,5 @@
 import { PrimaryLayout } from '@/presentation/layouts';
+import './projects.scss';
 import {
     NavBarDestop,
     NavBarMobile,
@@ -7,9 +8,11 @@ import {
     TemplatePrimary,
 } from '@/presentation/components';
 
-import './dashboard.scss';
+interface ProjectsProps {
+    // add your props here
+}
 
-const Dashboard = () => {
+const Projects = ({}: ProjectsProps) => {
     return (
         <PrimaryLayout>
             <TemplateNavDesktop>
@@ -18,10 +21,10 @@ const Dashboard = () => {
             </TemplateNavDesktop>
             <NavBarMobile />
             <TemplatePrimary>
-                <h2>add your components here</h2>
+                <h2>Projects works!</h2>
             </TemplatePrimary>
         </PrimaryLayout>
     );
 };
 
-export default Dashboard;
+export default Projects;

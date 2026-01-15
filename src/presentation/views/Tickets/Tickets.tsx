@@ -1,15 +1,18 @@
-import { PrimaryLayout } from '@/presentation/layouts';
 import {
-    NavBarDestop,
-    NavBarMobile,
-    SecondNavDesktop,
     TemplateNavDesktop,
+    NavBarDestop,
+    SecondNavDesktop,
+    NavBarMobile,
     TemplatePrimary,
 } from '@/presentation/components';
+import { PrimaryLayout } from '@/presentation/layouts';
+import './tickets.scss';
 
-import './dashboard.scss';
+interface TicketsProps {
+    // add your props here
+}
 
-const Dashboard = () => {
+const Tickets = ({}: TicketsProps) => {
     return (
         <PrimaryLayout>
             <TemplateNavDesktop>
@@ -18,10 +21,10 @@ const Dashboard = () => {
             </TemplateNavDesktop>
             <NavBarMobile />
             <TemplatePrimary>
-                <h2>add your components here</h2>
+                <h2>Tickets works!</h2>
             </TemplatePrimary>
         </PrimaryLayout>
     );
 };
 
-export default Dashboard;
+export default Tickets;

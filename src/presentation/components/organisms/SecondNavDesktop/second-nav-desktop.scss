@@ -13,4 +13,34 @@
     @include responsiveCirclesLogin(mobile) {
         display: none;
     }
+
+    &__list {
+        width: auto;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        &__item {
+            width: auto;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.250rem;
+            cursor: pointer;
+            &__icon {
+                width: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center
+            
+            }
+            &__title {
+                color: #444444;
+                font-size: 14px;
+            }
+        }
+    }
 }

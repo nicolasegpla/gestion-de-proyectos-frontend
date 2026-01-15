@@ -15,19 +15,14 @@ export const useNavigateService = () => {
         navigate('/dashboard');
     };
 
-    const goToHistorias = () => {
-        navigate('/historias');
-    };
-
-    const goToTickets = () => {
-        navigate('/tickets');
+    const defaultNavigate = (path: string) => {
+        navigate(path);
     };
 
     return {
         goToLogin,
         goToDashboard,
         goToRegister,
-        goToHistorias,
-        goToTickets,
+        defaultNavigate,
     };
 };
