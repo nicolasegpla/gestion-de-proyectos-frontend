@@ -28,15 +28,34 @@ interface NameState {
 }
 
 export const useNameStore = create<NameState>((set) => ({
-    nameUser: sessionStorage.getItem('session')
-        ? JSON.parse(sessionStorage.getItem('session')!).name
+    nameUser: sessionStorage.getItem('session-name')
+        ? JSON.parse(sessionStorage.getItem('session-name')!).name
         : null,
     setNameUser: (name) => {
         if (name) {
-            sessionStorage.setItem('session', JSON.stringify({ name }));
+            sessionStorage.setItem('session-name', JSON.stringify({ name }));
         } else {
-            sessionStorage.removeItem('session');
+            sessionStorage.removeItem('session-name');
         }
         set({ nameUser: name });
+    },
+}));
+
+interface RollState {
+    rollUser: string | null;
+    setRollUser: (roll: string | null) => void;
+}
+
+export const useRollUser = create<RollState>((set) => ({
+    rollUser: sessionStorage.getItem('session-roll')
+        ? JSON.parse(sessionStorage.getItem('session-roll')!).roll
+        : null,
+    setRollUser: (roll) => {
+        if (roll) {
+            sessionStorage.setItem('session-roll', JSON.stringify({ roll }));
+        } else {
+            sessionStorage.removeItem('session-roll');
+        }
+        set({ rollUser: roll });
     },
 }));
