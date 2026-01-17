@@ -1,5 +1,10 @@
 import React, { createContext } from 'react';
 
+interface ModalData {
+    state: boolean;
+    type: string;
+}
+
 interface PresentacionalContextProps {
     PrimerEstado: boolean;
     setPrimerEstado: (value: boolean) => void;
@@ -15,6 +20,8 @@ interface PresentacionalContextProps {
     setIdTicket: (value: number | null) => void;
     CrearTicketEstado: boolean;
     setCrearTicketEstado: (value: boolean) => void;
+    ModalVisible: ModalData;
+    setModalVisible: ({ state, type }: { state: boolean; type: string }) => void;
 }
 
 const PresentacionalContext = createContext<PresentacionalContextProps>({
@@ -32,6 +39,11 @@ const PresentacionalContext = createContext<PresentacionalContextProps>({
     setIdTicket: () => {},
     CrearTicketEstado: false,
     setCrearTicketEstado: () => {},
+    ModalVisible: {
+        state: false,
+        type: '',
+    },
+    setModalVisible: () => {},
 });
 
 const PresentacionalContextProvider = ({ children }: { children: React.ReactNode }) => {
@@ -42,6 +54,11 @@ const PresentacionalContextProvider = ({ children }: { children: React.ReactNode
     const [CrearHistoriaEstado, setCrearHistoriaEstado] = React.useState(false);
     const [IdTicket, setIdTicket] = React.useState<number | null>(null);
     const [CrearTicketEstado, setCrearTicketEstado] = React.useState(false);
+    const [ModalVisible, setModalVisible] = React.useState({
+        state: false,
+        type: '',
+    });
+
     return (
         <PresentacionalContext.Provider
             value={{
@@ -59,6 +76,8 @@ const PresentacionalContextProvider = ({ children }: { children: React.ReactNode
                 setIdTicket,
                 CrearTicketEstado,
                 setCrearTicketEstado,
+                ModalVisible,
+                setModalVisible,
             }}
         >
             {children}
