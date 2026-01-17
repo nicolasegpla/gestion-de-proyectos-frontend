@@ -10,3 +10,4 @@ export * from './Logo/Logo';
 export * from './ButtonUser/ButtonUser';
 export * from './ButtonIcon/ButtonIcon';
 export * from './BasicOption/BasicOption';
+export * from './ButtonToClose/ButtonToClose';
