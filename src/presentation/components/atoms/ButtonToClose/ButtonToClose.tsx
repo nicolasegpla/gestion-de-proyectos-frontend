@@ -1,13 +1,16 @@
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import './button-to-close.scss';
 
 interface ButtonToCloseProps {
-    // add your props here
+    onClick?: () => void;
 }
 
-export const ButtonToClose = ({}: ButtonToCloseProps) => {
+export const ButtonToClose = ({ onClick }: ButtonToCloseProps) => {
     return (
-        <div className="button-to-close">
-            <h2>ButtonToClose works!</h2>
-        </div>
+        <button onClick={onClick} className="button-to-close">
+            <span className="button-to-close__span">
+                <XMarkIcon className="icons-global" />
+            </span>
+        </button>
     );
 };

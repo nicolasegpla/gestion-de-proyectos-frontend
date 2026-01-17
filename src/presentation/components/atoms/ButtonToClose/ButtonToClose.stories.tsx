@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
 
 import { ButtonToClose } from './ButtonToClose';
 
@@ -13,5 +14,7 @@ export default meta;
 type Story = StoryObj<typeof ButtonToClose>;
 
 export const Primary: Story = {
-    args: {},
+    args: {
+        onClick: fn(),
+    },
 };
